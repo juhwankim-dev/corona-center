@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 32
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation AndroidX.CORE_KTX
+    implementation AndroidX.APP_COMPAT
+    implementation Google.MATERIAL
+    implementation AndroidX.CONSTRAINT_LAYOUT
+
+    testImplementation UnitTest.JUNIT
+    androidTestImplementation AndroidTest.ANDROID_JUNIT
+    androidTestImplementation AndroidTest.ESPRESSO_CORE
+
+    // coroutine
+    implementation Kotlin.COROUTINES_ANDROID
+
+    // LiveData
+    implementation AndroidX.LIVE_DATA_KTX
+
+    // Retrofit
+    implementation Libraries.RETROFIT
+    implementation Libraries.RETROFIT_CONVERTER_GSON
+    implementation Libraries.RETROFIT_ADAPTER
+
+    // okHttp
+    implementation Libraries.OKHTTP
+    implementation Libraries.OKHTTP_LOGGING_INTERCEPTOR
+
+    // Glide
+    implementation Libraries.GLIDE
+
+    // Room
+    implementation AndroidX.ROOM_RUNTIME
+    implementation AndroidX.ROOM_KTX
+    kapt AndroidX.ROOM_COMPILER
+
+    // SplashScreen
+    implementation AndroidX.SPLASH_SCREEN
+}
