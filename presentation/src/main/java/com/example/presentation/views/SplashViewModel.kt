@@ -19,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val getCenterListUseCase: GetCenterListUseCase,
-    private val readCenterListUseCase: ReadCenterListUseCase,
     private val writeCenterListUseCase: WriteCenterListUseCase,
     private val deleteAllCentersUseCase: DeleteAllCentersUseCase
 ): ViewModel() {
@@ -40,8 +39,6 @@ class SplashViewModel @Inject constructor(
         for(page in 1..10) {
             viewModelScope.launch {
                 getCenterListUseCase(page)
-                    .onStart { showProgress() }
-                    .onCompletion { hideProgress() }
                     .catch { _problem.postValue(Result.fail()) }
                     .collect {
                         if(it.isEmpty()) {
@@ -53,10 +50,6 @@ class SplashViewModel @Inject constructor(
                     }
             }
         }
-    }
-
-    private fun readCenterList(): LiveData<List<Center>> {
-        return readCenterListUseCase().asLiveData()
     }
 
     private fun writeCenterList(centerList: List<Center>) {
@@ -80,14 +73,6 @@ class SplashViewModel @Inject constructor(
                 getCenterList()
             }
         }
-    }
-
-    private fun showProgress() {
-
-    }
-
-    private fun hideProgress() {
-
     }
 
     companion object {

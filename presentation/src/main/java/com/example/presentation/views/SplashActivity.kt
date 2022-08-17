@@ -1,17 +1,18 @@
 package com.example.presentation.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.example.domain.util.Status
 import com.example.presentation.R
 import com.example.presentation.config.BaseActivity
-import com.example.presentation.databinding.ActivityMainBinding
+import com.example.presentation.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.concurrent.thread
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val TIME_FOR_1_PER = 20L
     private val STANDARD_FOR_WAIT = 80
     private val viewModel: SplashViewModel by viewModels()
@@ -76,12 +77,10 @@ class SplashActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main)
     }
 
     private fun startMapActivity() {
-        runOnUiThread {
-
-        }
+        startActivity(Intent(this, MapActivity::class.java))
     }
 
     companion object {
-        private const val TAG = "MainActivity_Corona"
+        private const val TAG = "SplashActivity_Corona"
     }
 }

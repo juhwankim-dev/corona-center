@@ -13,8 +13,9 @@ object CenterMapper {
                 facilityName = it.facilityName,
                 phoneNumber = it.phoneNumber,
                 updatedAt = it.updatedAt,
-                lat = it.lat,
-                lng = it.lng
+                centerType = it.centerType,
+                lat = it.lat.toDouble(),
+                lng = it.lng.toDouble()
             )
         }
     }
