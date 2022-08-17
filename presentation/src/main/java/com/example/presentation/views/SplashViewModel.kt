@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class SplashViewModel @Inject constructor(
     private val getCenterListUseCase: GetCenterListUseCase,
     private val readCenterListUseCase: ReadCenterListUseCase,
     private val writeCenterListUseCase: WriteCenterListUseCase,
@@ -26,12 +26,10 @@ class MainViewModel @Inject constructor(
     private val _problem = MutableLiveData<Result<Any>>()
     val problem: LiveData<Result<Any>> get() = _problem
 
-    private val _centerList = MutableLiveData<List<Center>>()
-    val centerList: LiveData<List<Center>> get() = _centerList
-
     // 이 값을 통해 10개의 페이지의 저장 진행률을 나타냄
     // ex) 3 -> 30%, 10 -> 100%
     private val _progressCount = MutableLiveData(0)
+    val progressCount: LiveData<Int> get() = _progressCount
 
     // 가장 먼저 저장된 db를 삭제하고 작업 시작
     init {
@@ -49,7 +47,6 @@ class MainViewModel @Inject constructor(
                         if(it.isEmpty()) {
                             _problem.postValue(Result.error("Response is empty", it))
                         } else {
-                            _centerList.postValue(it)
                             _problem.postValue(Result.success(it))
                             writeCenterList(it)
                         }
