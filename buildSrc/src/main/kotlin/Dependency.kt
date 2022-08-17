@@ -26,6 +26,7 @@ object Versions {
     const val RX_JAVA_ADAPTER = "2.5.0"
     const val KOIN = "3.2.0"
     const val GLIDE = "4.12.0"
+    const val HILT = "2.38.1"
 
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.3"
@@ -77,6 +78,8 @@ object Libraries {
     const val KOIN                       = "io.insert-koin:koin-core:${Versions.KOIN}"
     const val KOIN_ANDROID               = "io.insert-koin:koin-android:${Versions.KOIN}"
     const val GLIDE                      = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    const val HILT                       = "com.google.dagger:hilt-android:${Versions.HILT}"
+    const val HILT_COMPILER              = "com.google.dagger:hilt-compiler:${Versions.HILT}"
 }
 
 object UnitTest {

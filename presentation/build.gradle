@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -71,4 +72,15 @@ dependencies {
 
     // SplashScreen
     implementation AndroidX.SPLASH_SCREEN
+
+    // Hilt
+    implementation Libraries.HILT
+    kapt Libraries.HILT_COMPILER
+
+    // viewModel
+    implementation AndroidX.LIFECYCLE_VIEWMODEL_KTX
+
+    // ktx
+    implementation AndroidX.ACTIVITY_KTX
+    implementation AndroidX.FRAGMENT_KTX
 }
