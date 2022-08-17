@@ -27,6 +27,8 @@ object Versions {
     const val KOIN = "3.2.0"
     const val GLIDE = "4.12.0"
     const val HILT = "2.38.1"
+    const val NAVER_MAP = "3.15.0"
+    const val TED_PERMISSION = "3.3.0"
 
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.3"
@@ -80,6 +82,8 @@ object Libraries {
     const val GLIDE                      = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
     const val HILT                       = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val HILT_COMPILER              = "com.google.dagger:hilt-compiler:${Versions.HILT}"
+    const val NAVER_MAP                  = "com.naver.maps:map-sdk:${Versions.NAVER_MAP}"
+    const val TED_PERMISSION             = "io.github.ParkSangGwon:tedpermission-coroutine:${Versions.TED_PERMISSION}"
 }
 
 object UnitTest {

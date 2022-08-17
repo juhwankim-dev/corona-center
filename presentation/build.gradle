@@ -42,6 +42,7 @@ dependencies {
     implementation AndroidX.APP_COMPAT
     implementation Google.MATERIAL
     implementation AndroidX.CONSTRAINT_LAYOUT
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     testImplementation UnitTest.JUNIT
     androidTestImplementation AndroidTest.ANDROID_JUNIT
@@ -83,4 +84,10 @@ dependencies {
     // ktx
     implementation AndroidX.ACTIVITY_KTX
     implementation AndroidX.FRAGMENT_KTX
+
+    // Naver 지도 SDK
+    implementation Libraries.NAVER_MAP
+
+    // Ted Permission
+    implementation Libraries.TED_PERMISSION
 }
