@@ -1,6 +1,5 @@
 package com.example.presentation.views
 
-import android.Manifest
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +11,6 @@ import com.example.presentation.config.BaseActivity
 import com.example.presentation.databinding.ActivityMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.gun0912.tedpermission.coroutine.TedPermission
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
@@ -23,10 +21,6 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MapActivity : BaseActivity<ActivityMapBinding>(R.layout.activity_map), OnMapReadyCallback {
@@ -40,7 +34,7 @@ class MapActivity : BaseActivity<ActivityMapBinding>(R.layout.activity_map), OnM
         super.onCreate(savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        requestPermissions()
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
         initView()
         initEvent()
     }
@@ -53,22 +47,6 @@ class MapActivity : BaseActivity<ActivityMapBinding>(R.layout.activity_map), OnM
                 fm.beginTransaction().add(R.id.map, it).commit()
             }
         mapFragment.getMapAsync(this)
-    }
-
-    // 위치권한 관련 요청
-    private fun requestPermissions() {
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        CoroutineScope(Dispatchers.Main).launch {
-            val permissionResult = CoroutineScope(Dispatchers.Default).async {
-                TedPermission.create()
-                    .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
-                    .check()
-            }.await()
-
-            if(!permissionResult.isGranted) {
-                showToastMessage(resources.getString(R.string.permission_info))
-            }
-        }
     }
 
     @UiThread
