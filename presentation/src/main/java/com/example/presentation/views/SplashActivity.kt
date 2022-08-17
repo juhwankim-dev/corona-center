@@ -1,5 +1,6 @@
 package com.example.presentation.views
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,12 @@ import com.example.domain.util.Status
 import com.example.presentation.R
 import com.example.presentation.config.BaseActivity
 import com.example.presentation.databinding.ActivitySplashBinding
+import com.gun0912.tedpermission.coroutine.TedPermission
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlin.concurrent.thread
 
 @AndroidEntryPoint
@@ -19,8 +25,26 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        manageProgress()
-        initEvent()
+
+        requestPermissions()
+    }
+
+    // 위치권한 관련 요청
+    private fun requestPermissions() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val permissionResult = CoroutineScope(Dispatchers.Default).async {
+                TedPermission.create()
+                    .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+                    .check()
+            }.await()
+
+            if(permissionResult.isGranted) {
+                manageProgress()
+                initEvent()
+            } else {
+                showToastMessage(resources.getString(R.string.permission_info))
+            }
+        }
     }
 
     private fun manageProgress() {
