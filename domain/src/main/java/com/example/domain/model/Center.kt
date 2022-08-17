@@ -13,6 +13,7 @@ data class Center(
     val facilityName: String,
     val phoneNumber: String,
     val updatedAt: String,
-    val lat: String,
-    val lng: String
+    val centerType: String,
+    val lat: Double,
+    val lng: Double
 )
