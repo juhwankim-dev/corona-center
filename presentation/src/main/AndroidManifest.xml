@@ -4,7 +4,7 @@
 
     <application android:largeHeap="true">
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
